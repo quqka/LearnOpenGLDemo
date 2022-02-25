@@ -39,11 +39,4 @@ else(glfw3_FOUND)
     message(FATAL_ERROR "glfw3 library not found")
 endif(glfw3_FOUND)
 
-if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include/stb_image.h")
-	file(DOWNLOAD
-		"https://raw.githubusercontent.com/nothings/stb/master/stb_image.h"
-		"${CMAKE_CURRENT_SOURCE_DIR}/include/stb_image.h"
-	)
-endif(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include/stb_image.h")
-
 include_directories("include")

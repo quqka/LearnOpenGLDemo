@@ -1,30 +1,35 @@
-function(vcpkg_dowload_func)
+function(vcpkg_download_func)
 	if(NOT DEFINED GITHUB_HOME)
 		set(GITHUB_HOME https://github.com)
-	endif()
+	endif(NOT DEFINED GITHUB_HOME)
+	set(VCPKG_HOME "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg")
 	execute_process(COMMAND
-		git clone ${GITHUB_HOME}/microsoft/vcpkg.git "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg"
+		git clone ${GITHUB_HOME}/microsoft/vcpkg.git "${VCPKG_HOME}"
 	)
-
+	
 	if(WIN32)
-		message("running vcpkg/bootstrap-vcpkg.bat")
-		execute_process(COMMAND
-			cmd /c "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/bootstrap-vcpkg.bat"
-		)
+#		if(NOT EXISTS "${VCPKG_HOME}/vcpkg.exe")
+#			message("bootstrap-vcpkg.bat running ......")
+			execute_process(COMMAND
+				cmd /c "${VCPKG_HOME}/bootstrap-vcpkg.bat"
+			)
+#		endif(NOT EXISTS "${VCPKG_HOME}/vcpkg.exe")
 	else()
-		message("running vcpkg/bootstrap-vcpkg.sh")
-		execute_process(COMMAND
-			sh "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/bootstrap-vcpkg.sh"
-		)
+#		if(NOT EXISTS "${VCPKG_HOME}/vcpkg")
+#			message("bootstrap-vcpkg.sh running ......")
+			execute_process(COMMAND
+				sh "$${VCPKG_HOME}/bootstrap-vcpkg.sh"
+			)	
+#		endif(NOT EXISTS "${VCPKG_HOME}/vcpkg")
 	endif()
-
 	set(ENV{PATH} "$ENV{PATH}${CMAKE_CURRENT_SOURCE_DIR}/vcpkg")
 	set(VCPKG_ROOT
 		"${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
 		CACHE PATH "")
 endfunction()
 
-option(vcpkg_dowload "download vcpkg")
-if(vcpkg_dowload)
-	vcpkg_dowload_func()
-endif()
+option(VCPKG_DOWNLOAD "download vcpkg")
+if(VCPKG_DOWNLOAD)
+	MESSAGE("ROOT")
+	vcpkg_download_func()
+endif(VCPKG_DOWNLOAD)
