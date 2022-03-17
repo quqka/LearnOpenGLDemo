@@ -11,7 +11,7 @@ function(std_image_download_func)
 	endif(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include/stb_image.h")
 endfunction()
 
-option(STD_IMAGE_DOWNLOAD "download std_image")
+option(STD_IMAGE_DOWNLOAD "download std_image" ON)
 if(STD_IMAGE_DOWNLOAD)
 	std_image_download_func()
 endif()

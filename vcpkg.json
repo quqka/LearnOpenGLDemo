@@ -4,7 +4,8 @@
     "port-version": 0,
     "dependencies":[
         "glfw3",
-        "glad"
+        "glad",
+        "glm"
     ],
     "license":"MIT"
 }
