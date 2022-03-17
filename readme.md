@@ -25,7 +25,7 @@
     make
     ```
 ## 注意：
-在Windows环境中，如果没有或不想用Visual Studio，如果使用MinGW64编译会出现[<font color="#B22222">Warning: corrupt .drectve at end of def file</font>](https://stackoverflow.com/questions/25161814/warning-corrupt-drectve-at-end-of-def-file)的错误，我们可以通过以下的方式解决：
+在Windows环境中，如果没有或不想用Visual Studio，在使用MinGW64编译时可能会出现[<font color="#B22222">Warning: corrupt .drectve at end of def file</font>](https://stackoverflow.com/questions/25161814/warning-corrupt-drectve-at-end-of-def-file)的错误，我们可以通过以下的方式解决：
 1. 在CMakeLists.txt中添加以下代码：
     ```
     set(VCPKG_TARGET_TRIPLET "x64-mingw-dynamic")
